@@ -38,10 +38,11 @@ read-only permissions and no signing credentials. It does not create tags or
 releases, update the live appcast, or deploy the website.
 
 Its candidate artifact contains Debug/full-test and Release validation evidence,
-`Panoptos-unsigned.zip`, notes, exact-commit metadata, `appcast-draft.json`, checksums, and matching
-source. The unsigned app is review material and must never be distributed as an
-official release. Inspect the workflow log and artifact metadata against the
-commit you intend to sign. Never run privileged release steps for untrusted PRs.
+`Panoptos-unsigned.zip`, notes, exact-commit metadata, `appcast-draft.json`,
+checksums, and matching source. These are review files, not the public release
+asset list. The unsigned app must never be distributed as an official download.
+Inspect the workflow log and artifact metadata against the commit you intend to
+sign. Never run privileged release steps for untrusted PRs.
 
 ## Local signing and packaging
 
@@ -60,11 +61,22 @@ scripts/release.sh --release-notes build/release-notes-1.4.0.md --github-reposit
 ```
 
 The dry run validates local packaging without notarization or publication; its
-DMG is not an official release. A normal run appends the GPL notice and exact
-versioned source-archive link to the supplied release notes; review that final
-`Panoptos.md` as the release text. It prepares the signed/notarized
-candidate under `build/release/candidate/vX.Y.Z/` and stages a candidate appcast
-in the website checkout. It never commits or pushes. Inspect all staged changes.
+DMG is not an official release. A normal run uses `Panoptos.md` as the notes
+embedded in the Sparkle appcast and prepares `ReleaseNotes.md` as the GitHub
+release body, including the GPL/source link and SHA-256 checksums. It prepares
+the signed/notarized candidate under `build/release/candidate/vX.Y.Z/` and stages
+the appcast in the website checkout. Candidate metadata, `Panoptos.md`,
+`ReleaseNotes.md`, `SHA256SUMS`, and `appcast.xml` remain local review or
+publication-input files. The script never commits or pushes.
+
+The public GitHub release has an exact two-asset allowlist:
+
+- `Panoptos.dmg`
+- `Panoptos-X.Y.Z-source.tar.gz`
+
+Publish the contents of `ReleaseNotes.md` as the release description. Put both
+asset checksums in that description; do not upload a checksum file, notes file,
+appcast, candidate metadata, unsigned build, logs, or result bundle as an asset.
 
 The corresponding-source archive contains the exact app commit, Xcode project,
 resources, build/packaging scripts, notices, and source for the pinned Sparkle
@@ -105,14 +117,16 @@ After approval:
 1. Publish the sanitized GPL source, enable Issues, and verify anonymous source
    and Issues access. Tag the exact reviewed commit as `vX.Y.Z`; tags and assets
    are immutable after release.
-2. Publish `Panoptos.dmg`, matching source archive, checksums, and approved notes
-   in the GitHub release. Download anonymously and compare bytes.
+2. Create the GitHub release with the approved `ReleaseNotes.md` contents and
+   upload only `Panoptos.dmg` and the matching source archive. The body carries
+   both checksums. Download both assets anonymously and compare bytes.
 3. Publish the generated appcast and website only after assets are reachable.
    Verify version/build, enclosure URL/length/signature, release notes, old feed
    entries, and existing immutable download paths. Never edit signed feed data
    by hand or overwrite published binaries.
 4. Publish the cask only after its GitHub DMG is public and its checksum matches.
-   Once verified, expose `brew install --cask ruverse/tap/panoptos` on the website.
+   Keep the verified `brew install --cask ruverse/tap/panoptos` command in the
+   application README.
 5. Enable the verified Gumroad support link. File delivery must use the same DMG
    with matching source/GPL links; modifying the listing or its delivery requires
    explicit authorization. No real purchase is needed for testing.

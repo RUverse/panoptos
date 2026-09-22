@@ -19,7 +19,7 @@ Panoptos is built entirely on the public Accessibility API. It does not modify o
 
 ## Install
 
-[Download from Gumroad](https://1391562068503.gumroad.com/l/yqqmi) to support development, or [download free from GitHub](https://github.com/RUverse/panoptos/releases/latest). Official GitHub releases are signed and notarized and include matching source archives and checksums.
+[Download from Gumroad](https://1391562068503.gumroad.com/l/yqqmi) to support development, or [download free from GitHub](https://github.com/RUverse/panoptos/releases/latest). Each official GitHub release provides exactly two uploaded assets: the signed and notarized DMG and its matching complete source archive. Their SHA-256 checksums appear in the release description.
 
 To install with [Homebrew](https://github.com/RUverse/homebrew-tap):
 
@@ -82,7 +82,7 @@ All source builds are unrestricted. Sparkle uses the official update feed; accep
 
 Sparkle checks `https://panoptos.ruverse.ai/appcast.xml` on the user's chosen schedule and always asks before downloading or installing. Profiling and automatic installation remain disabled. Updates never depend on payment.
 
-GitHub Actions prepares reviewable candidates; it does not publish releases or deploy the website. Production signing and notarization remain local. Unsigned CI artifacts are not official downloads. See [the release guide](docs/releasing.md) for candidate preparation, matching source, verification, and publication ordering.
+GitHub Actions prepares reviewable candidates; it does not publish releases or deploy the website. Production signing and notarization remain local. Unsigned CI artifacts, logs, appcast drafts, metadata, notes files, and checksum files are not public release assets. See [the release guide](docs/releasing.md) for candidate preparation, matching source, verification, and publication ordering.
 
 Version/build values come from Xcode's `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION`. Each published build must exceed all previous builds. Published binaries and version tags are immutable; corrections require a new release.
 

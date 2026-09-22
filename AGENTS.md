@@ -225,17 +225,18 @@ Preparation is local or in GitHub Actions; publishing requires a later explicit 
 - Keep version/build values in Xcode settings, with `Info.plist` reading them.
 - Keep Developer ID/hardened-runtime/timestamp/nested-code audits, app and DMG notarization, stapling, and Gatekeeper validation. Do not weaken unrelated checks when removing obsolete license entitlements.
 - Build matching corresponding-source archives beside the binary, including project/resources, packaging scripts, notices, and pinned Sparkle source and required non-system dependency source. GitHub's automatic repository archive alone is insufficient.
-- Prepare release notes, SHA-256 checksums, exact commit/version/build metadata, and the candidate Sparkle appcast. Generate signed enclosure data from final DMG bytes with Sparkle tooling; never hand-edit it.
+- Prepare release notes, SHA-256 checksums, exact commit/version/build metadata, and the candidate Sparkle appcast. These are local/Actions review inputs: publish notes and both asset checksums in the GitHub release body, and publish the appcast through the website. Generate signed enclosure data from final DMG bytes with Sparkle tooling; never hand-edit it.
 - Preserve `https://panoptos.ruverse.ai/appcast.xml`, its signing key, older entries, and old download paths.
-- The new official DMG is an immutable GitHub release asset associated with an immutable version tag and exact source commit. Do not overwrite released bytes.
+- A public GitHub release uploads exactly two assets: the signed/notarized `Panoptos.dmg` and matching complete `Panoptos-X.Y.Z-source.tar.gz`. Do not upload candidate metadata, notes/checksum files, appcast data, unsigned builds, logs, result bundles, or GitHub Actions review artifacts. GitHub-generated repository archives may remain available but do not replace the complete source asset.
+- The official DMG, complete source archive, and version tag are immutable and tied to the exact source commit. Do not overwrite released bytes.
 - Review source/app/website/cask changes, exact notes, hashes, source completeness, tests, signing/notarization results, and all intended publication actions together. Confirm outstanding GPL suffix, repository, version, Gumroad, and Homebrew inputs before first publication.
 
 ### Publication after explicit authorization
 
 1. Publish/verify sanitized GPL source and its matching immutable tag.
-2. Publish the verified signed/notarized GitHub DMG, matching source package, checksums, and approved notes. Verify anonymous downloads and bytes.
+2. Publish the approved release body with both checksums and upload only the verified signed/notarized GitHub DMG and matching complete source package. Verify anonymous downloads and bytes.
 3. Publish the generated appcast and website only after the asset is available; verify live version, build, URL, length, signature, notes, and links.
-4. Publish the Homebrew cask using that same DMG and verified checksum. Advertise its exact install command only after the tap/cask resolves.
+4. Publish the Homebrew cask using that same DMG and verified checksum. Keep its exact verified install command in the README; the website does not need to advertise it.
 5. Enable the verified optional Gumroad product link. Do not modify a listing, deliver files, or contact customers without authorization.
 6. Retire legacy payment infrastructure only after checking existing customer needs and obtaining authorization for the live changes.
 

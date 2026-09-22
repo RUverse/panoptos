@@ -639,6 +639,24 @@ source_archive=$("$ROOT/scripts/package-source.sh" \
     --output "$downloads")
 
 prepared_commit=$(git rev-parse HEAD)
+published_notes="$downloads/ReleaseNotes.md"
+python3 - "$staged_notes" "$published_notes" "$staged_dmg" "$source_archive" <<'PY'
+import hashlib
+from pathlib import Path
+import sys
+
+notes_path, output_path, *asset_paths = map(Path, sys.argv[1:])
+checksums = [
+    f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}"
+    for path in asset_paths
+]
+Path(output_path).write_text(
+    notes_path.read_text().rstrip()
+    + "\n\n### SHA-256\n\n```text\n"
+    + "\n".join(checksums)
+    + "\n```\n"
+)
+PY
 python3 - "$downloads/candidate.json" "$VERSION" "$BUILD_NUMBER" \
     "$prepared_commit" "$GITHUB_REPOSITORY" "$release_tag" <<'PY'
 import json
@@ -653,6 +671,8 @@ metadata = {
     "tag": tag,
     "binary": "Panoptos.dmg",
     "source": f"Panoptos-{version}-source.tar.gz",
+    "publicAssets": ["Panoptos.dmg", f"Panoptos-{version}-source.tar.gz"],
+    "releaseNotes": "ReleaseNotes.md",
     "appcast": "appcast.xml",
     "signing": "Developer ID, hardened runtime, secure timestamps",
     "notarization": "app and disk image accepted and stapled",
@@ -664,7 +684,7 @@ PY
 (
     cd "$downloads"
     shasum -a 256 "$(basename "$staged_dmg")" "$(basename "$source_archive")" \
-        "$APP_NAME.md" appcast.xml candidate.json > SHA256SUMS
+        "$APP_NAME.md" ReleaseNotes.md appcast.xml candidate.json > SHA256SUMS
 )
 
 # Stage the website feed only after all content, history, signature, length,
@@ -674,6 +694,7 @@ cp "$downloads/appcast.xml" "$SITE_DIR/public/appcast.xml"
 printf 'appcast:   %s\n' "$SITE_DIR/public/appcast.xml"
 printf 'download:  %s (%s bytes, matches appcast)\n' "$staged_dmg" "$staged_bytes"
 printf 'notes:     %s (embedded and non-empty)\n' "$staged_notes"
+printf 'release:   %s (GitHub release body with public asset checksums)\n' "$published_notes"
 printf 'source:    %s\n' "$source_archive"
 printf 'metadata:  %s\n' "$downloads/candidate.json"
 printf 'checksums: %s\n' "$downloads/SHA256SUMS"
@@ -683,8 +704,11 @@ printf 'Signed, notarized, and stapled:\n  %s (%s bytes)\n\n' \
     "$DMG" "$(stat -f "%z" "$DMG")"
 printf 'To publish:\n'
 printf '  1. Show the exact commit, notes, hashes, and signing evidence; wait for explicit approval.\n'
-printf '  2. Create immutable tag %s at the prepared commit and publish the files in:\n' "$release_tag"
-printf '       %s\n' "$downloads"
+printf '  2. Create immutable tag %s at the prepared commit, then upload only the DMG and source:\n' "$release_tag"
+printf '       gh release create %q --repo %q --verify-tag --title %q --notes-file %q %q %q\n' \
+    "$release_tag" "$GITHUB_REPOSITORY" "$APP_NAME $VERSION" "$published_notes" \
+    "$staged_dmg" "$source_archive"
+printf '     Keep appcast.xml, candidate.json, notes, and SHA256SUMS as preparation artifacts.\n'
 printf '  3. Only after GitHub assets are reachable, publish the staged website appcast:\n'
 printf '       cd %s && git add public/appcast.xml && git commit && git push\n' "${SITE_DIR:-../panoptos-website}"
 printf '  4. confirm the feed and immutable GitHub image both resolve with HTTP 200:\n'
