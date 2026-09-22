@@ -17,11 +17,17 @@ Panoptos is a local macOS window manager that divides each monitor into a persis
 
 Panoptos is built entirely on the public Accessibility API. It does not modify or cover the system menu bar and does not use Screen Recording, Input Monitoring, event injection, or private APIs. User-editable global shortcuts are registered through macOS's public hot-key API.
 
-## Free and open source
+## Install
 
-Panoptos is free software under **GPL-3.0-or-later**. Every build is fully usable without a purchase, trial, account, license key, device limit, or periodic license validation. Optional purchases through the website's [support page](https://panoptos.ruverse.ai/buy) support development; they do not unlock features or change the license.
+[Download from Gumroad](https://1391562068503.gumroad.com/l/yqqmi) to support development, or [download free from GitHub](https://github.com/RUverse/panoptos/releases/latest). Official GitHub releases are signed and notarized and include matching source archives and checksums.
 
-Official releases provide the same signed and notarized app through GitHub, Homebrew, and optional Gumroad delivery. Each release includes its matching corresponding-source archive and checksums. [Download free from GitHub](https://github.com/RUverse/panoptos/releases/latest), browse the [source](https://github.com/RUverse/panoptos), or [support development on Gumroad](https://1391562068503.gumroad.com/l/yqqmi). See the [download page](https://panoptos.ruverse.ai/#get-panoptos) for distribution availability. Homebrew support is prepared in [RUverse/homebrew-tap](https://github.com/RUverse/homebrew-tap); its install command is advertised only once the Panoptos cask is published. The first open-source release is 1.4.0; older licensed binaries are not free-release candidates.
+To install with [Homebrew](https://github.com/RUverse/homebrew-tap):
+
+```sh
+brew install --cask ruverse/tap/panoptos
+```
+
+Requires macOS 14 or later. No account, license key, or trial period is required.
 
 Upgrading preserves your layouts, attached windows, switcher order, shortcuts, onboarding completion, and preferences. Old activation and trial records are no longer read or used; they remain untouched in Keychain. Previously distributed versions retain the terms accompanying those versions.
 
