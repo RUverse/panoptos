@@ -546,11 +546,6 @@ cat >> "$staged_notes" <<NOTICES
 Panoptos is free software under GPL-3.0-or-later. Matching source for this
 build: ${download_url_prefix}Panoptos-${VERSION}-source.tar.gz
 NOTICES
-source_archive=$("$ROOT/scripts/package-source.sh" \
-    --version "$VERSION" \
-    --build "$BUILD_NUMBER" \
-    --commit HEAD \
-    --output "$downloads")
 
 # Seed generation with the current feed so historical entries and download
 # paths remain intact while Sparkle adds the new immutable GitHub enclosure.
@@ -560,6 +555,7 @@ cp "$SITE_DIR/public/appcast.xml" "$downloads/appcast.xml"
     --download-url-prefix "$download_url_prefix" \
     --embed-release-notes \
     --link "$PRODUCT_LINK" \
+    --maximum-versions 0 \
     -o "$downloads/appcast.xml" \
     "$downloads"
 
@@ -633,6 +629,14 @@ cmp -s "$DMG" "$staged_dmg" \
     || fail "staged image differs from the notarized one"
 grep -Fq "${download_url_prefix}Panoptos-${VERSION}-source.tar.gz" "$staged_notes" \
     || fail "staged release notes do not link the matching source archive"
+
+# Package corresponding source only after Sparkle has scanned the candidate
+# directory. Non-update archives do not belong in generate_appcast's input.
+source_archive=$("$ROOT/scripts/package-source.sh" \
+    --version "$VERSION" \
+    --build "$BUILD_NUMBER" \
+    --commit HEAD \
+    --output "$downloads")
 
 prepared_commit=$(git rev-parse HEAD)
 python3 - "$downloads/candidate.json" "$VERSION" "$BUILD_NUMBER" \
