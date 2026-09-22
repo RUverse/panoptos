@@ -1,0 +1,183 @@
+name: Prepare release candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable version (X.Y.Z)
+        required: true
+        type: string
+      build:
+        description: Build number, greater than every published build
+        required: true
+        type: string
+      github_repository:
+        description: Canonical OWNER/REPOSITORY for final release URLs
+        required: true
+        type: string
+      release_notes:
+        description: Markdown release notes for this candidate
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-candidate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Build, test, and package
+    runs-on: macos-26
+    timeout-minutes: 45
+    env:
+      CANDIDATE_VERSION: ${{ inputs.version }}
+      CANDIDATE_BUILD: ${{ inputs.build }}
+      CANDIDATE_REPOSITORY: ${{ inputs.github_repository }}
+      RELEASE_NOTES: ${{ inputs.release_notes }}
+      DERIVED_DATA: /tmp/PanoptosDerivedData
+      CANDIDATE_DIR: /tmp/PanoptosCandidate
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Validate candidate metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CANDIDATE_VERSION" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          [[ "$CANDIDATE_BUILD" =~ ^[1-9][0-9]*$ ]]
+          [[ "$CANDIDATE_REPOSITORY" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]
+          [[ -n "$RELEASE_NOTES" ]]
+          mkdir -p "$CANDIDATE_DIR"
+          printf '%s\n' "$RELEASE_NOTES" > "$CANDIDATE_DIR/Panoptos.md"
+          curl --fail --silent --show-error --location \
+            https://panoptos.ruverse.ai/appcast.xml -o "$RUNNER_TEMP/published-appcast.xml"
+          python3 - "$RUNNER_TEMP/published-appcast.xml" <<'PY'
+          import os
+          import sys
+          import xml.etree.ElementTree as ET
+
+          candidate = int(os.environ["CANDIDATE_BUILD"])
+          root = ET.parse(sys.argv[1]).getroot()
+          builds = []
+          versions = []
+          for element in root.iter():
+              name = element.tag.rsplit("}", 1)[-1]
+              if name == "version" and element.text:
+                  value = element.text.strip()
+                  if value.isdigit():
+                      builds.append(int(value))
+              if name == "shortVersionString" and element.text:
+                  versions.append(tuple(map(int, element.text.strip().split("."))))
+          if builds and candidate <= max(builds):
+              raise SystemExit(f"candidate build {candidate} must be greater than published build {max(builds)}")
+          version = tuple(map(int, os.environ["CANDIDATE_VERSION"].split(".")))
+          if versions and version <= max(versions):
+              latest = ".".join(map(str, max(versions)))
+              raise SystemExit(f"candidate version must be greater than published version {latest}")
+          PY
+
+      - name: Resolve pinned dependencies
+        run: >-
+          xcodebuild -resolvePackageDependencies
+          -project Panoptos.xcodeproj -scheme Panoptos -derivedDataPath "$DERIVED_DATA"
+
+      - name: Verify committed version and build
+        shell: bash
+        run: |
+          set -euo pipefail
+          for configuration in Debug Release; do
+            settings=$(xcodebuild -project Panoptos.xcodeproj -target Panoptos \
+              -configuration "$configuration" -showBuildSettings)
+            version=$(awk '/ MARKETING_VERSION =/ {print $3; exit}' <<<"$settings")
+            build=$(awk '/ CURRENT_PROJECT_VERSION =/ {print $3; exit}' <<<"$settings")
+            [[ "$version" == "$CANDIDATE_VERSION" ]] \
+              || { printf '%s version %s does not match input %s\n' "$configuration" "$version" "$CANDIDATE_VERSION" >&2; exit 1; }
+            [[ "$build" == "$CANDIDATE_BUILD" ]] \
+              || { printf '%s build %s does not match input %s\n' "$configuration" "$build" "$CANDIDATE_BUILD" >&2; exit 1; }
+          done
+
+      - name: Build Debug
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild -project Panoptos.xcodeproj -scheme Panoptos -configuration Debug \
+            -derivedDataPath "$DERIVED_DATA" \
+            -resultBundlePath "$CANDIDATE_DIR/DebugBuild.xcresult" \
+            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$CANDIDATE_DIR/DebugBuild.log"
+
+      - name: Run full test suite
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild test -project Panoptos.xcodeproj -scheme Panoptos -configuration Debug \
+            -derivedDataPath "$DERIVED_DATA" \
+            -resultBundlePath "$CANDIDATE_DIR/Tests.xcresult" \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$CANDIDATE_DIR/Tests.log"
+
+      - name: Build unsigned Release candidate
+        shell: bash
+        run: |
+          set -o pipefail
+          xcodebuild -project Panoptos.xcodeproj -scheme Panoptos -configuration Release \
+            -destination 'generic/platform=macOS' -derivedDataPath "$DERIVED_DATA" \
+            -resultBundlePath "$CANDIDATE_DIR/ReleaseBuild.xcresult" \
+            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$CANDIDATE_DIR/ReleaseBuild.log"
+
+      - name: Package review artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          app="$DERIVED_DATA/Build/Products/Release/Panoptos.app"
+          [[ -d "$app" ]]
+          ditto -c -k --keepParent "$app" "$CANDIDATE_DIR/Panoptos-unsigned.zip"
+          scripts/package-source.sh --version "$CANDIDATE_VERSION" --build "$CANDIDATE_BUILD" \
+            --commit "$GITHUB_SHA" --derived-data "$DERIVED_DATA" --output "$CANDIDATE_DIR"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          candidate = Path(os.environ["CANDIDATE_DIR"])
+          metadata = {
+              "version": os.environ["CANDIDATE_VERSION"],
+              "build": int(os.environ["CANDIDATE_BUILD"]),
+              "commit": os.environ["GITHUB_SHA"],
+              "repository": os.environ["CANDIDATE_REPOSITORY"],
+              "tag": f"v{os.environ['CANDIDATE_VERSION']}",
+              "officialBinary": "pending local Developer ID signing and notarization",
+              "appcast": "pending generation from the final signed DMG bytes",
+          }
+          (candidate / "candidate.json").write_text(json.dumps(metadata, indent=2) + "\n")
+          appcast_draft = {
+              "feed": "https://panoptos.ruverse.ai/appcast.xml",
+              "version": metadata["version"],
+              "build": metadata["build"],
+              "enclosure": (
+                  f"https://github.com/{metadata['repository']}/releases/download/"
+                  f"{metadata['tag']}/Panoptos.dmg"
+              ),
+              "length": "pending final signed DMG bytes",
+              "edSignature": "pending local Sparkle signing",
+          }
+          (candidate / "appcast-draft.json").write_text(
+              json.dumps(appcast_draft, indent=2) + "\n"
+          )
+          PY
+          cd "$CANDIDATE_DIR"
+          shasum -a 256 Panoptos.md Panoptos-unsigned.zip Panoptos-*-source.tar.gz \
+            candidate.json appcast-draft.json > SHA256SUMS
+
+      - name: Upload reviewable candidate
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Panoptos-${{ inputs.version }}-${{ inputs.build }}-candidate
+          path: /tmp/PanoptosCandidate
+          if-no-files-found: warn
+          retention-days: 14

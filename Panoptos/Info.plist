@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon.icns</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.productivity</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 Alireza Ektefaie. Licensed under GPL-3.0-or-later.</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>SUFeedURL</key>
+    <string>https://panoptos.ruverse.ai/appcast.xml</string>
+    <key>SUPublicEDKey</key>
+    <string>5BqLhiilhFmsQSqB1w7rI1w1NMYLzujWVKkE22Ml6TQ=</string>
+    <!-- Defaults only. Sparkle persists the user's own choice in its defaults,
+         and these values apply until the user changes one. -->
+    <key>SUEnableAutomaticChecks</key>
+    <true/>
+    <key>SUScheduledCheckInterval</key>
+    <integer>86400</integer>
+    <!-- Panoptos checks for updates and asks. It never downloads or installs
+         one on its own. -->
+    <key>SUAutomaticallyUpdate</key>
+    <false/>
+    <!-- Sparkle can attach OS and hardware details to each check. Panoptos
+         does not send them, so an update check reveals nothing beyond the
+         request itself. -->
+    <key>SUEnableSystemProfiling</key>
+    <false/>
+</dict>
+</plist>

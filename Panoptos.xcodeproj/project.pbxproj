@@ -1,0 +1,224 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A00000000000000000000001 /* PanoptosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* PanoptosApp.swift */; };
+		A00000000000000000000002 /* MenuModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* MenuModels.swift */; };
+		A00000000000000000000003 /* AccessibilityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* AccessibilityClient.swift */; };
+		A00000000000000000000004 /* PanoptosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* PanoptosModel.swift */; };
+		A00000000000000000000005 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* ContentView.swift */; };
+		A00000000000000000000006 /* MenuParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* MenuParsingTests.swift */; };
+		A00000000000000000000007 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000009 /* XCTest.framework */; };
+		A00000000000000000000008 /* WindowMenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* WindowMenuOverlay.swift */; };
+		A00000000000000000000009 /* LayoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* LayoutModels.swift */; };
+		A0000000000000000000000A /* LayoutManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* LayoutManagerTests.swift */; };
+		A0000000000000000000000B /* ShortcutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000010 /* ShortcutModels.swift */; };
+		A0000000000000000000000C /* ShortcutRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* ShortcutRecorder.swift */; };
+		A0000000000000000000000D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* Assets.xcassets */; };
+		A0000000000000000000000E /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000013 /* AppIcon.icon */; };
+		A0000000000000000000000F /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000014 /* SettingsModels.swift */; };
+		A00000000000000000000015 /* WindowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000015 /* WindowModels.swift */; };
+		A00000000000000000000016 /* SystemTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000016 /* SystemTransition.swift */; };
+		A00000000000000000000017 /* LoginItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000017 /* LoginItemController.swift */; };
+		A00000000000000000000018 /* KeepAwakeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000018 /* KeepAwakeController.swift */; };
+		A00000000000000000000019 /* PanoptosModel+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000019 /* PanoptosModel+Layout.swift */; };
+		A0000000000000000000001A /* PanoptosModel+Lifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001A /* PanoptosModel+Lifecycle.swift */; };
+		A0000000000000000000001B /* PanoptosModel+Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001B /* PanoptosModel+Persistence.swift */; };
+		A0000000000000000000001C /* PanoptosModel+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001C /* PanoptosModel+Navigation.swift */; };
+		A0000000000000000000001D /* PanoptosModel+Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001D /* PanoptosModel+Shortcuts.swift */; };
+		A0000000000000000000001E /* PanoptosModel+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001E /* PanoptosModel+Settings.swift */; };
+		A0000000000000000000001F /* PanoptosModel+FocusMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000001F /* PanoptosModel+FocusMode.swift */; };
+		A00000000000000000000020 /* UpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* UpdateController.swift */; };
+		A00000000000000000000022 /* SectionOverlayPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000022 /* SectionOverlayPanel.swift */; };
+		A00000000000000000000023 /* OverlayMenuControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000023 /* OverlayMenuControls.swift */; };
+		A00000000000000000000024 /* WindowSwitcherControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000024 /* WindowSwitcherControls.swift */; };
+		A00000000000000000000025 /* WindowSwitcherBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000025 /* WindowSwitcherBar.swift */; };
+		A00000000000000000000026 /* SectionOverlayFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000026 /* SectionOverlayFeedback.swift */; };
+		A00000000000000000000029 /* PanoptosModel+Runtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000029 /* PanoptosModel+Runtime.swift */; };
+		A00000000000000000000030 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000030 /* LICENSE.txt */; };
+		A00000000000000000000031 /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000031 /* NOTICE.txt */; };
+		A00000000000000000000032 /* Sparkle-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000032 /* Sparkle-LICENSE.txt */; };
+		A0000000000000000000002B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002C /* OnboardingView.swift */; };
+		A00000000000000000000021 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = Q00000000000000000000001 /* Sparkle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C00000000000000000000001 = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E00000000000000000000001;
+			remoteInfo = Panoptos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B0000000000000000000002B /* Panoptos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Panoptos.entitlements; sourceTree = "<group>"; };
+		B00000000000000000000001 /* PanoptosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoptosApp.swift; sourceTree = "<group>"; };
+		B00000000000000000000002 /* MenuModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuModels.swift; sourceTree = "<group>"; };
+		B00000000000000000000003 /* AccessibilityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityClient.swift; sourceTree = "<group>"; };
+		B00000000000000000000004 /* PanoptosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoptosModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000005 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B00000000000000000000006 /* MenuParsingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuParsingTests.swift; sourceTree = "<group>"; };
+		B00000000000000000000007 /* Panoptos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Panoptos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000008 /* PanoptosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanoptosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000009 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		B0000000000000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0000000000000000000000B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B0000000000000000000000D /* WindowMenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowMenuOverlay.swift; sourceTree = "<group>"; };
+		B0000000000000000000000E /* LayoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutModels.swift; sourceTree = "<group>"; };
+		B0000000000000000000000F /* LayoutManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutManagerTests.swift; sourceTree = "<group>"; };
+		B00000000000000000000010 /* ShortcutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutModels.swift; sourceTree = "<group>"; };
+		B00000000000000000000011 /* ShortcutRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorder.swift; sourceTree = "<group>"; };
+		B00000000000000000000012 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B00000000000000000000013 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		B00000000000000000000014 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		B00000000000000000000015 /* WindowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WindowModels.swift"; sourceTree = "<group>"; };
+		B00000000000000000000016 /* SystemTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemTransition.swift"; sourceTree = "<group>"; };
+		B00000000000000000000017 /* LoginItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginItemController.swift"; sourceTree = "<group>"; };
+		B00000000000000000000020 /* UpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateController.swift"; sourceTree = "<group>"; };
+		B00000000000000000000021 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		B00000000000000000000018 /* KeepAwakeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeepAwakeController.swift"; sourceTree = "<group>"; };
+		B00000000000000000000019 /* PanoptosModel+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Layout.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001A /* PanoptosModel+Lifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Lifecycle.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001B /* PanoptosModel+Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Persistence.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001C /* PanoptosModel+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Navigation.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001D /* PanoptosModel+Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Shortcuts.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001E /* PanoptosModel+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Settings.swift"; sourceTree = "<group>"; };
+		B0000000000000000000001F /* PanoptosModel+FocusMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+FocusMode.swift"; sourceTree = "<group>"; };
+		B00000000000000000000022 /* SectionOverlayPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlayPanel.swift; sourceTree = "<group>"; };
+		B00000000000000000000023 /* OverlayMenuControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayMenuControls.swift; sourceTree = "<group>"; };
+		B00000000000000000000024 /* WindowSwitcherControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSwitcherControls.swift; sourceTree = "<group>"; };
+		B00000000000000000000025 /* WindowSwitcherBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowSwitcherBar.swift; sourceTree = "<group>"; };
+		B00000000000000000000026 /* SectionOverlayFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOverlayFeedback.swift; sourceTree = "<group>"; };
+		B00000000000000000000029 /* PanoptosModel+Runtime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PanoptosModel+Runtime.swift"; sourceTree = "<group>"; };
+		B00000000000000000000030 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		B00000000000000000000031 /* NOTICE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
+		B00000000000000000000032 /* Sparkle-LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sparkle-LICENSE.txt"; sourceTree = "<group>"; };
+		B0000000000000000000002C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F00000000000000000000001 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000021 /* Sparkle in Frameworks */,); runOnlyForDeploymentPostprocessing = 0; };
+		F00000000000000000000002 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000007 /* XCTest.framework in Frameworks */,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G00000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000002 /* Panoptos */,
+				G00000000000000000000007 /* PanoptosTests */,
+				B00000000000000000000021 /* Signing.xcconfig */,
+				B0000000000000000000000B /* README.md */,
+				G00000000000000000000008 /* Frameworks */,
+				G00000000000000000000009 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G00000000000000000000002 /* Panoptos */ = {isa = PBXGroup; path = Panoptos; sourceTree = "<group>"; children = (B0000000000000000000002B, B00000000000000000000001, G00000000000000000000003, G00000000000000000000004, G00000000000000000000005, G0000000000000000000000B, G00000000000000000000006, G0000000000000000000000A, B00000000000000000000012, B0000000000000000000000A,); };
+		G00000000000000000000003 /* Models */ = {isa = PBXGroup; path = Models; sourceTree = "<group>"; children = (B00000000000000000000002, B0000000000000000000000E, B00000000000000000000010, B00000000000000000000014, B00000000000000000000015, B00000000000000000000016,); };
+		G00000000000000000000004 /* Accessibility */ = {isa = PBXGroup; path = Accessibility; sourceTree = "<group>"; children = (B00000000000000000000003,); };
+		G00000000000000000000005 /* Store */ = {isa = PBXGroup; path = Store; sourceTree = "<group>"; children = (B00000000000000000000004, B00000000000000000000019, B0000000000000000000001A, B0000000000000000000001B, B0000000000000000000001C, B0000000000000000000001D, B0000000000000000000001E, B0000000000000000000001F, B00000000000000000000029,); };
+		G00000000000000000000006 /* Views */ = {isa = PBXGroup; path = Views; sourceTree = "<group>"; children = (B00000000000000000000005, B0000000000000000000000D, B00000000000000000000022, B00000000000000000000023, B00000000000000000000024, B00000000000000000000025, B00000000000000000000026, B00000000000000000000011, B0000000000000000000002C,); };
+		G00000000000000000000007 /* PanoptosTests */ = {isa = PBXGroup; path = PanoptosTests; sourceTree = "<group>"; children = (B00000000000000000000006, B0000000000000000000000F,); };
+		G00000000000000000000008 /* Frameworks */ = {isa = PBXGroup; children = (B00000000000000000000009,); name = Frameworks; sourceTree = "<group>"; };
+		G00000000000000000000009 /* Products */ = {isa = PBXGroup; children = (B00000000000000000000007, B00000000000000000000008,); name = Products; sourceTree = "<group>"; };
+		G0000000000000000000000B /* System */ = {isa = PBXGroup; path = System; sourceTree = "<group>"; children = (B00000000000000000000017, B00000000000000000000018, B00000000000000000000020,); };
+		G0000000000000000000000A /* Resources */ = {isa = PBXGroup; path = Resources; sourceTree = "<group>"; children = (B00000000000000000000013, G0000000000000000000000C,); };
+		G0000000000000000000000C /* Legal */ = {isa = PBXGroup; path = Legal; sourceTree = "<group>"; children = (B00000000000000000000030, B00000000000000000000031, B00000000000000000000032,); };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E00000000000000000000001 /* Panoptos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = H00000000000000000000002;
+			buildPhases = (I00000000000000000000001, F00000000000000000000001, L00000000000000000000001,);
+			buildRules = ();
+			dependencies = ();
+			name = Panoptos;
+			productName = Panoptos;
+			productReference = B00000000000000000000007;
+			productType = "com.apple.product-type.application";
+		};
+		E00000000000000000000002 /* PanoptosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = H00000000000000000000003;
+			buildPhases = (I00000000000000000000002, F00000000000000000000002,);
+			buildRules = ();
+			dependencies = (J00000000000000000000001,);
+			name = PanoptosTests;
+			productName = PanoptosTests;
+			productReference = B00000000000000000000008;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 2660; LastUpgradeCheck = 2660; TargetAttributes = {E00000000000000000000001 = {CreatedOnToolsVersion = 26.6;}; E00000000000000000000002 = {CreatedOnToolsVersion = 26.6; TestTargetID = E00000000000000000000001;};};};
+			buildConfigurationList = H00000000000000000000001;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base,);
+			mainGroup = G00000000000000000000001;
+			packageReferences = (P00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */,);
+			productRefGroup = G00000000000000000000009;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (E00000000000000000000001, E00000000000000000000002,);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		L00000000000000000000001 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A0000000000000000000000D /* Assets.xcassets in Resources */, A0000000000000000000000E /* AppIcon.icon in Resources */, A00000000000000000000030 /* LICENSE.txt in Resources */, A00000000000000000000031 /* NOTICE.txt in Resources */, A00000000000000000000032 /* Sparkle-LICENSE.txt in Resources */,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		I00000000000000000000001 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000001, A00000000000000000000002, A00000000000000000000009, A0000000000000000000000B, A0000000000000000000000F, A00000000000000000000003, A00000000000000000000004, A00000000000000000000005, A00000000000000000000008, A00000000000000000000022, A00000000000000000000023, A00000000000000000000024, A00000000000000000000025, A00000000000000000000026, A0000000000000000000000C, A00000000000000000000015, A00000000000000000000016, A00000000000000000000017, A00000000000000000000018, A00000000000000000000019, A0000000000000000000001A, A0000000000000000000001B, A0000000000000000000001C, A0000000000000000000001D, A0000000000000000000001E, A0000000000000000000001F, A00000000000000000000020, A00000000000000000000029, A0000000000000000000002B,); runOnlyForDeploymentPostprocessing = 0; };
+		I00000000000000000000002 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000006, A0000000000000000000000A,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		J00000000000000000000001 = {isa = PBXTargetDependency; target = E00000000000000000000001; targetProxy = C00000000000000000000001; };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		K00000000000000000000001 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; SDKROOT = macosx; SWIFT_VERSION = 5.0;}; name = Debug; };
+		K00000000000000000000002 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; SDKROOT = macosx; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_VERSION = 5.0;}; name = Release; };
+		K00000000000000000000003 = {isa = XCBuildConfiguration; baseConfigurationReference = B00000000000000000000021 /* Signing.xcconfig */; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_IDENTITY = "$(PANOPTOS_DEBUG_CODE_SIGN_IDENTITY)"; CODE_SIGN_STYLE = Manual; COMBINE_HIDPI_IMAGES = YES; CURRENT_PROJECT_VERSION = 11; ENABLE_APP_SANDBOX = NO; ENABLE_TESTABILITY = YES; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Panoptos/Info.plist; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks"; MARKETING_VERSION = 1.4.0; PRODUCT_BUNDLE_IDENTIFIER = ai.ruverse.Panoptos; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = macosx; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_VERSION = 5.0;}; name = Debug; };
+		K00000000000000000000004 = {isa = XCBuildConfiguration; baseConfigurationReference = B00000000000000000000021 /* Signing.xcconfig */; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_ENTITLEMENTS = Panoptos/Panoptos.entitlements; CODE_SIGN_IDENTITY = "Apple Development"; CODE_SIGN_STYLE = Automatic; COMBINE_HIDPI_IMAGES = YES; CURRENT_PROJECT_VERSION = 11; ENABLE_APP_SANDBOX = NO; ENABLE_HARDENED_RUNTIME = YES; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Panoptos/Info.plist; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks"; MARKETING_VERSION = 1.4.0; OTHER_CODE_SIGN_FLAGS = "--timestamp"; PRODUCT_BUNDLE_IDENTIFIER = ai.ruverse.Panoptos; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = macosx; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0;}; name = Release; };
+		K00000000000000000000005 = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = ai.ruverse.Panoptos.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Panoptos.app/Contents/MacOS/Panoptos";}; name = Debug; };
+		K00000000000000000000006 = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_IDENTITY = "-"; CODE_SIGN_STYLE = Manual; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = ai.ruverse.Panoptos.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Panoptos.app/Contents/MacOS/Panoptos";}; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		H00000000000000000000001 = {isa = XCConfigurationList; buildConfigurations = (K00000000000000000000001, K00000000000000000000002,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		H00000000000000000000002 = {isa = XCConfigurationList; buildConfigurations = (K00000000000000000000003, K00000000000000000000004,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		H00000000000000000000003 = {isa = XCConfigurationList; buildConfigurations = (K00000000000000000000005, K00000000000000000000006,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		P00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {kind = upToNextMajorVersion; minimumVersion = 2.0.0;};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		Q00000000000000000000001 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = P00000000000000000000001 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D00000000000000000000001 /* Project object */;
+}

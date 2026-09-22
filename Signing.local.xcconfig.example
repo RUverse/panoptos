@@ -1,0 +1,9 @@
+// Copy to Signing.local.xcconfig, which is not committed, and set your team.
+// Find it at https://developer.apple.com/account under Membership. This is
+// used only for local signing; never commit your copied file.
+PANOPTOS_DEVELOPMENT_TEAM = YOUR_TEAM_ID
+
+// Optional: use an installed certificate to retain Accessibility approval
+// across Debug rebuilds. Keep using the same identity.
+// List available identities with: security find-identity -v -p codesigning
+// PANOPTOS_DEBUG_CODE_SIGN_IDENTITY = Apple Development

@@ -1,0 +1,19 @@
+// Signing configuration for the Panoptos app target.
+//
+// The developer's Apple team is supplied by an optional local file so the
+// project does not have to name one person's account. The team ID is not a
+// secret: it is embedded in the code signature of every shipped build and is
+// readable with `codesign -dvvv`. Keeping it out of tracked files means anyone
+// building Panoptos signs with their own account without editing a file that
+// everyone else also edits.
+//
+// #include? does not fail when the file is absent, so a checkout without one
+// still builds. Debug defaults to ad-hoc signing; a local certificate override
+// gives Accessibility approval a stable signer across rebuilds. Release needs a
+// real Developer ID, and scripts/release.sh reports the missing file directly.
+// Panoptos has no app-specific Keychain entitlement, so Release does not need
+// a provisioning profile for application data-protection access.
+PANOPTOS_DEBUG_CODE_SIGN_IDENTITY = -
+#include? "Signing.local.xcconfig"
+
+DEVELOPMENT_TEAM = $(PANOPTOS_DEVELOPMENT_TEAM)
