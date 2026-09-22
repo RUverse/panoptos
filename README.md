@@ -1,3 +1,5 @@
+![Panoptos — organize your Mac windows into custom zones](docs/images/panoptos-cover.png)
+
 # Panoptos
 
 Create snap zones. Stack apps. Switch windows naturally. Keep every workspace predictable.
